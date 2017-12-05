@@ -1,8 +1,5 @@
 package com.qzq.transform;
 
-import com.qzq.spider.Bite;
-import com.qzq.spider.Gate;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,16 +12,20 @@ import java.util.Map;
  * @desc
  */
 public class Gate2Bite {
-    private static Map<String, Map<String, Double>> bite = null;
-    private static Map<String, Map<String, Double>> gate = null;
-    private static double initMoney = 10000;
+    private Map<String, Map<String, Double>> bite = null;
+    private Map<String, Map<String, Double>> gate = null;
+    private double initMoney = 10000;
 
-    static {
-        bite = Bite.run();
-        gate = Gate.run();
+    //    static {
+//        bite = Bite.run();
+//        gate = Gate.run();
+//    }
+    public void init(Map<String, Map<String, Double>> gateMap, Map<String, Map<String, Double>> biteMap) {
+        bite = biteMap;
+        gate = gateMap;
     }
 
-    public static void gate2bite() {
+    public void gate2bite() {
         for (String key : gate.keySet()) {
             Map<String, Double> gateMap = gate.get(key);
             double buyGate = gateMap.get("buycny");
@@ -38,7 +39,7 @@ public class Gate2Bite {
         }
     }
 
-    public static List<Map<String, String>> gate2bite1() {
+    public List<Map<String, String>> gate2bite1() {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         for (String key : gate.keySet()) {
             Map<String, String> map = new HashMap<String, String>();
@@ -57,7 +58,7 @@ public class Gate2Bite {
         return list;
     }
 
-    public static void bite2gate() {
+    public void bite2gate() {
         for (String key : gate.keySet()) {
             Map<String, Double> gateMap = gate.get(key);
             double sellGate = gateMap.get("sellcny");
@@ -72,11 +73,9 @@ public class Gate2Bite {
     }
 
     public static void main(String[] args) {
-        System.out.println("gate2bite");
-        gate2bite();
-        ;
-        System.out.println("bite2gate");
-        bite2gate();
-        ;
+//        System.out.println("gate2bite");
+//        gate2bite();
+//        System.out.println("bite2gate");
+//        bite2gate();
     }
 }

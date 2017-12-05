@@ -1,9 +1,5 @@
 package com.qzq.transform;
 
-import com.qzq.spider.Gate;
-import com.qzq.spider.GateHuilv;
-import com.qzq.spider.Poloniex;
-
 import java.util.Map;
 
 /**
@@ -13,19 +9,27 @@ import java.util.Map;
  * @desc
  */
 public class Gate2Poloniex {
-    private static Map<String, Double> poloniex = null;
-    private static Map<String, Map<String, Double>> gate = null;
-    private static double initMoney;
-    private static final Map<String, Double> huilv;
+    private Map<String, Double> poloniex = null;
+    private Map<String, Map<String, Double>> gate = null;
+    private double initMoney;
+    private Map<String, Double> huilv;
 
-    static {
-        poloniex = Poloniex.run();
-        gate = Gate.run();
-        huilv = GateHuilv.run();
+    //     {
+//        poloniex = Poloniex.run();
+//        gate = Gate.run();
+//        huilv = GateHuilv.run();
+//        initMoney = 10000 / huilv.get("buy");
+//    }
+    public void init(Map<String, Double> poloniexMap, Map<String, Map<String, Double>> gateMap, Map<String, Double> huilvMap) {
+
+        poloniex = poloniexMap;
+        gate = gateMap;
+        huilv = huilvMap;
         initMoney = 10000 / huilv.get("buy");
     }
 
-    public static void gate2poloniex() {
+
+    public void gate2poloniex() {
         for (String key : gate.keySet()) {
             Map<String, Double> gateMap = gate.get(key);
             double buyGate = gateMap.get("buy");
@@ -37,7 +41,7 @@ public class Gate2Poloniex {
         }
     }
 
-    public static void poloniex2gate() {
+    public void poloniex2gate() {
         for (String key : gate.keySet()) {
             Map<String, Double> gateMap = gate.get(key);
             double sellGate = gateMap.get("sell");
@@ -49,10 +53,9 @@ public class Gate2Poloniex {
         }
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         System.out.println("gat2poloniex");
         gate2poloniex();
-        ;
         System.out.println("poloniex2gate");
         poloniex2gate();
         ;
