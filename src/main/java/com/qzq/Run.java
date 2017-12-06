@@ -30,6 +30,7 @@ public class Run {
         System.out.println("-------------------------------------------------------");
         System.out.println("bite2gate");
         gate2Bite.bite2gate();
+
         System.out.println("-------------------------------------------------------");
         System.out.println("gate2poloniex");
         Gate2Poloniex gate2Poloniex = new Gate2Poloniex();
