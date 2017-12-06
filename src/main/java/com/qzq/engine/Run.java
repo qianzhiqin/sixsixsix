@@ -1,4 +1,4 @@
-package com.qzq;
+package com.qzq.engine;
 
 import com.qzq.spider.Bite;
 import com.qzq.spider.Gate;
