@@ -25,21 +25,7 @@ public class Gate2Bite {
         gate = gateMap;
     }
 
-    public void gate2bite() {
-        for (String key : gate.keySet()) {
-            Map<String, Double> gateMap = gate.get(key);
-            double buyGate = gateMap.get("buycny");
-            double buyGateUsdt = gateMap.get("buy");
-            Map<String, Double> biteMap = bite.get(key) == null ? null : bite.get(key);
-            if (biteMap != null) {
-                double sellBite = biteMap.get("sell");
-                Double res = (initMoney / buyGate) * sellBite - initMoney;
-                System.out.println(key + ": " + res + "   |  buy: " + buyGate + "(" + buyGateUsdt + ")   sell: " + sellBite);
-            }
-        }
-    }
-
-    public List<Map<String, String>> gate2bite1() {
+    public List<Map<String, String>> gate2bite() {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         for (String key : gate.keySet()) {
             Map<String, String> map = new HashMap<String, String>();
@@ -47,19 +33,25 @@ public class Gate2Bite {
             double buyGate = gateMap.get("buycny");
             double buyGateUsdt = gateMap.get("buy");
             Map<String, Double> biteMap = bite.get(key) == null ? null : bite.get(key);
-            map.put("key", key);
-            map.put("buy", buyGate + "");
             if (biteMap != null) {
                 double sellBite = biteMap.get("sell");
                 Double res = (initMoney / buyGate) * sellBite - initMoney;
+                map.put("key", key);
+                map.put("res", res + "");
+                map.put("buy", buyGate + "(" + buyGateUsdt + ")");
+                map.put("sell", sellBite + "");
                 System.out.println(key + ": " + res + "   |  buy: " + buyGate + "(" + buyGateUsdt + ")   sell: " + sellBite);
             }
+            list.add(map);
         }
         return list;
     }
 
+
     public void bite2gate() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         for (String key : gate.keySet()) {
+            Map<String, String> map = new HashMap<String, String>();
             Map<String, Double> gateMap = gate.get(key);
             double sellGate = gateMap.get("sellcny");
             double sellGateUsdt = gateMap.get("sell");
@@ -67,6 +59,10 @@ public class Gate2Bite {
             if (biteMap != null) {
                 double buyBite = biteMap.get("buy");
                 Double res = (initMoney / buyBite) * sellGate - initMoney;
+                map.put("key", key);
+                map.put("res", res + "");
+                map.put("buy", buyBite + "");
+                map.put("sell", sellGate + "(" + sellGateUsdt + ")");
                 System.out.println(key + ": " + res + "   |  buy: " + buyBite + "   sell: " + sellGate + "(" + sellGateUsdt + ")");
             }
         }

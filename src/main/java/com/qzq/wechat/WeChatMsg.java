@@ -18,8 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class WeChatMsg {
@@ -84,13 +82,12 @@ public class WeChatMsg {
      * @return String
      * @Title:创建微信发送请求post数据
      */
-    public String createpostdata(String touser, String msgtype, int application_id, String contentKey, String contentValue) {
+    public String createpostdata(String touser, String msgtype, int application_id, String content) {
         WeChatData wcd = new WeChatData();
         wcd.setTouser(touser);
         wcd.setAgentid(application_id);
         wcd.setMsgtype(msgtype);
-        Map<Object, Object> content = new HashMap<Object, Object>();
-        content.put(contentKey, contentValue + "\n----------------------\n" + df.format(new Date()));
+//        Map<Object, Object> content = new HashMap<Object, Object>();
         wcd.setText(content);
         return gson.toJson(wcd);
     }
