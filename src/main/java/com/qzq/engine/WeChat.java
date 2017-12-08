@@ -10,6 +10,9 @@ import com.qzq.wechat.UrlData;
 import com.qzq.wechat.WeChatMsg;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +27,8 @@ public class WeChat {
     private final String TOUSER = "qianzhiqin";
     private final String MSGTYPE = "text";
     private final int AGENTID = 1000002;
+    private final double cny = 100d;
+    private final double usdt = 18d;
 
     public void sendWeChat(String msg) {
         WeChatMsg sw = new WeChatMsg();
@@ -42,32 +47,80 @@ public class WeChat {
 
     public String getMsg() {
         StringBuilder sb = new StringBuilder();
-        Map<String, Map<String, Double>> gate = Gate.run();
-        Map<String, Map<String, Double>> bite = Bite.run();
-        Map<String, Double> poloniex = Poloniex.run();
-        Map<String, Double> huilv = GateHuilv.run();
-        System.out.println("huilv");
-        System.out.println("buy: " + huilv.get("buy") + "   sell:" + huilv.get("sell"));
-        sb.append("huilv: buy:" + huilv.get("buy") + "   sell:" + huilv.get("sell"));
-        sb.append("------------gate2bite--------------");
+        Map<String, Map<String, Double>> gate = null;
+        try {
+            gate = Gate.run();
+        } catch (Exception e) {
+
+        }
+        Map<String, Map<String, Double>> bite = null;
+        try {
+            bite = Bite.run();
+        } catch (Exception e) {
+        }
+        Map<String, Double> poloniex = null;
+        try {
+            poloniex = Poloniex.run();
+        } catch (Exception e) {
+
+        }
+        Map<String, Double> huilv = null;
+        try {
+            huilv = GateHuilv.run();
+        } catch (Exception e) {
+        }
+        sb.append("-----" + getTime() + "-----" + "\n");
+        sb.append("huilv: buy:" + huilv.get("buy") + "   sell:" + huilv.get("sell") + "\n");
+        sb.append("-------gate2bite---------" + "\n");
         Gate2Bite gate2Bite = new Gate2Bite();
         gate2Bite.init(gate, bite);
-        gate2Bite.gate2bite();
-        System.out.println("-------------------------------------------------------");
-        System.out.println("bite2gate");
-        gate2Bite.bite2gate();
-        System.out.println("-------------------------------------------------------");
-        System.out.println("gate2poloniex");
+        List<Map<String, String>> gate2biteMap = gate2Bite.gate2bite();
+        checkMoney(gate2biteMap, sb, false);
+        sb.append("-------bite2gate---------" + "\n");
+        List<Map<String, String>> bite2gateMap = gate2Bite.bite2gate();
+        checkMoney(bite2gateMap, sb, false);
+        sb.append("------ gate2poloniex---------" + "\n");
         Gate2Poloniex gate2Poloniex = new Gate2Poloniex();
         gate2Poloniex.init(poloniex, gate, huilv);
-        gate2Poloniex.gate2poloniex();
-        System.out.println("-------------------------------------------------------");
-        System.out.println("poloniex2gate");
-        gate2Poloniex.poloniex2gate();
-        return "";
+        List<Map<String, String>> gate2poloniexMap = gate2Poloniex.gate2poloniex();
+        checkMoney(gate2poloniexMap, sb, true);
+        sb.append("-------poloniex2gate--------" + "\n");
+        List<Map<String, String>> poloniex2gateMap = gate2Poloniex.poloniex2gate();
+        checkMoney(poloniex2gateMap, sb, true);
+
+        System.out.println(sb.toString());
+        return sb.toString();
+    }
+
+    public void checkMoney(List<Map<String, String>> list, StringBuilder sb, boolean isUsdt) {
+
+        for (Map<String, String> map : list) {
+            if (map.size() > 0) {
+                String res = map.get("res");
+                double money = Double.parseDouble(res);
+                if (!isUsdt) {
+                    if (money > cny) {
+                        sb.append((int) money + "|" + map.get("key") + "|" + map.get("buy") + "|" + map.get("sell") + "\n");
+//                        System.out.println((int) money + "|" + map.get("key") + "|" + map.get("buy") + "|" + map.get("sell"));
+                    }
+                } else {
+                    if (money > usdt) {
+                        sb.append((int) money + "|" + map.get("key") + "|" + map.get("buy") + "|" + map.get("sell") + "\n");
+//                        System.out.println((int) money + map.get("key") + "|" + map.get("buy") + "|" + map.get("sell"));
+                    }
+                }
+            }
+        }
+    }
+
+    public String getTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date());
     }
 
     public static void main(String[] args) {
-
+        WeChat weChat = new WeChat();
+        String msg =weChat.getMsg();
+        weChat.sendWeChat(msg);
     }
 }

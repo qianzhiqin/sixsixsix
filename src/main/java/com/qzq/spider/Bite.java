@@ -26,7 +26,7 @@ public class Bite {
         String result = "";
         String random = getRandom();
         try {
-            Connection con = Jsoup.connect(url + random).userAgent(userAgent);
+            Connection con = Jsoup.connect(url + random).userAgent(userAgent).timeout(30000);
             con.header("Accept", "application/json, text/javascript, */*; q=0.01");
             con.header("Host", "bite.ceo");
             con.header("Referer", "https://bite.ceo/btc.jsp");

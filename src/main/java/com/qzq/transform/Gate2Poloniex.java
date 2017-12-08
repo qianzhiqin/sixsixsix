@@ -1,5 +1,8 @@
 package com.qzq.transform;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,28 +32,48 @@ public class Gate2Poloniex {
     }
 
 
-    public void gate2poloniex() {
-        for (String key : gate.keySet()) {
-            Map<String, Double> gateMap = gate.get(key);
-            double buyGate = gateMap.get("buy");
-            double buyPoloniex = poloniex.get(key) == null ? 0 : poloniex.get(key);
-            if (buyPoloniex != 0) {
-                Double res = (initMoney / buyGate) * buyPoloniex - initMoney;
-                System.out.println(key + ": " + res + "   |  buy: " + buyGate + "   sell: " + buyPoloniex);
+    public List<Map<String, String>> gate2poloniex() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        if (poloniex.size() > 0 && gate.size() > 0) {
+            for (String key : gate.keySet()) {
+                Map<String, String> map = new HashMap<String, String>();
+                Map<String, Double> gateMap = gate.get(key);
+                double buyGate = gateMap.get("buy");
+                double buyPoloniex = poloniex.get(key) == null ? 0 : poloniex.get(key);
+                if (buyPoloniex != 0) {
+                    Double res = (initMoney / buyGate) * buyPoloniex - initMoney;
+                    map.put("key", key);
+                    map.put("res", res + "");
+                    map.put("buy", buyGate + "");
+                    map.put("sell", buyPoloniex + "");
+                    System.out.println(key + ": " + res + "   |  buy: " + buyGate + "   sell: " + buyPoloniex);
+                }
+                list.add(map);
             }
         }
+        return list;
     }
 
-    public void poloniex2gate() {
-        for (String key : gate.keySet()) {
-            Map<String, Double> gateMap = gate.get(key);
-            double sellGate = gateMap.get("sell");
-            double buyPoloniex = poloniex.get(key) == null ? 0 : poloniex.get(key);
-            if (buyPoloniex != 0) {
-                Double res = (initMoney / buyPoloniex) * sellGate - initMoney;
-                System.out.println(key + ": " + res + "   |  buy: " + buyPoloniex + "   sell: " + sellGate);
+    public List<Map<String, String>> poloniex2gate() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        if (poloniex.size() > 0 && gate.size() > 0) {
+            for (String key : gate.keySet()) {
+                Map<String, String> map = new HashMap<String, String>();
+                Map<String, Double> gateMap = gate.get(key);
+                double sellGate = gateMap.get("sell");
+                double buyPoloniex = poloniex.get(key) == null ? 0 : poloniex.get(key);
+                if (buyPoloniex != 0) {
+                    Double res = (initMoney / buyPoloniex) * sellGate - initMoney;
+                    map.put("key", key);
+                    map.put("res", res + "");
+                    map.put("buy", buyPoloniex + "");
+                    map.put("sell", sellGate + "");
+                    System.out.println(key + ": " + res + "   |  buy: " + buyPoloniex + "   sell: " + sellGate);
+                }
+                list.add(map);
             }
         }
+        return list;
     }
 
     public void main(String[] args) {
