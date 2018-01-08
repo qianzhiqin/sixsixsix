@@ -25,7 +25,7 @@ public class FrameListener {
             }
 
             public void windowClosed(WindowEvent e) {
-
+                System.exit(1);
             }
 
             public void windowIconified(WindowEvent e) {

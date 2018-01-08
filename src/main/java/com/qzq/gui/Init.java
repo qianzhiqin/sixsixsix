@@ -28,10 +28,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class Init {
 
-    public static void initAll() {
-        DataCenter.schedule();
+    public static void initConfig() {
         initGlobalFont();
         initTheme();
+    }
+
+
+    public static void initAll() {
+        DataCenter.schedule();
         initTab();
     }
 
@@ -48,7 +52,7 @@ public class Init {
 //            configer.save();
 //        }
 
-        Font fnt = new Font("Microsoft YaHei UI", Font.PLAIN, 40);
+        Font fnt = new Font("Microsoft YaHei UI", Font.PLAIN, 20);
         FontUIResource fontRes = new FontUIResource(fnt);
         for (Enumeration keys = UIManager.getDefaults().keys(); keys.hasMoreElements(); ) {
             Object key = keys.nextElement();
@@ -62,7 +66,7 @@ public class Init {
      * 初始化look and feel
      */
     public static void initTheme() {
-        String theme = "BeautyEye";
+        String theme = "weblaf";
         try {
             switch (theme) {
                 case "BeautyEye":
@@ -97,8 +101,9 @@ public class Init {
     }
 
     public static void initTab() {
+
         try {
-            Thread.sleep(6000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -107,6 +112,7 @@ public class Init {
             @Override
             public void run() {
                 /*********************huilv****************************/
+                System.out.println("----start flush---");
                 JLabel gate = MainWindow.mainWindow.getGate();
                 JLabel buy1 = MainWindow.mainWindow.getBuy1();
                 JLabel sell1 = MainWindow.mainWindow.getSell1();
@@ -124,6 +130,7 @@ public class Init {
                 }
                 DefaultTableModel model = new DefaultTableModel(cellData, headerNames);
                 dataTable.setModel(model);
+                System.out.println("----end flush---");
             }
         };
         service.scheduleAtFixedRate(task, 0, 20, TimeUnit.SECONDS);

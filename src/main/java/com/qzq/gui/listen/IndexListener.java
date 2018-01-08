@@ -18,7 +18,6 @@ public class IndexListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseEntered(e);
-                System.out.println("1111");
             }
             @Override
             public void mouseEntered(MouseEvent e) {

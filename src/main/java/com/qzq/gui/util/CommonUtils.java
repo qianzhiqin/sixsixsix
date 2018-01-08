@@ -1,5 +1,6 @@
 package com.qzq.gui.util;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import java.util.Date;
  * @desc
  */
 public class CommonUtils {
+    public static DecimalFormat df   = new DecimalFormat("######0.00");
 
     public static String now(){
         Date date = new Date();
