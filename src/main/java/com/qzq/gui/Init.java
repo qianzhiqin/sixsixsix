@@ -2,6 +2,7 @@ package com.qzq.gui;
 
 import com.alee.laf.WebLookAndFeel;
 import com.qzq.engine.DataCenter;
+import com.qzq.gui.util.CommonUtils;
 import com.qzq.transform.Gate2Poloniex;
 import com.sun.java.swing.plaf.motif.MotifLookAndFeel;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
@@ -14,6 +15,10 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Enumeration;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author qianzhiqin
@@ -97,18 +102,31 @@ public class Init {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        JTable dataTable = MainWindow.mainWindow.getDataTable();
-        String[] headerNames = {"coin", "g-p差值", "buy", "sell", "p-g差值", "buy", "sell"};
-        String[][] cellData = null;
-        System.out.println("=======");
-        if (DataCenter.gateHuilvMap != null && DataCenter.poloniexMap != null && DataCenter.gateMap != null) {
-            System.out.println("enter");
-            Gate2Poloniex gate2Poloniex = new Gate2Poloniex();
-            gate2Poloniex.init(DataCenter.poloniexMap, DataCenter.gateMap, DataCenter.gateHuilvMap);
-            cellData = gate2Poloniex.getTableData();
-        }
-        DefaultTableModel model = new DefaultTableModel(cellData, headerNames);
-        dataTable.setModel(model);
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(3);
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                /*********************huilv****************************/
+                JLabel gate = MainWindow.mainWindow.getGate();
+                JLabel buy1 = MainWindow.mainWindow.getBuy1();
+                JLabel sell1 = MainWindow.mainWindow.getSell1();
+                gate.setText("gate  " + CommonUtils.now());
+                buy1.setText("buy:" + String.valueOf(DataCenter.gateHuilvMap.get("buy")));
+                sell1.setText("sell:" + String.valueOf(DataCenter.gateHuilvMap.get("sell")));
+                /*********************table****************************/
+                JTable dataTable = MainWindow.mainWindow.getDataTable();
+                String[] headerNames = {"coin", "g-p差值", "buy", "sell", "p-g差值", "buy", "sell"};
+                String[][] cellData = null;
+                if (DataCenter.gateHuilvMap != null && DataCenter.poloniexMap != null && DataCenter.gateMap != null) {
+                    Gate2Poloniex gate2Poloniex = new Gate2Poloniex();
+                    gate2Poloniex.init(DataCenter.poloniexMap, DataCenter.gateMap, DataCenter.gateHuilvMap);
+                    cellData = gate2Poloniex.getTableData();
+                }
+                DefaultTableModel model = new DefaultTableModel(cellData, headerNames);
+                dataTable.setModel(model);
+            }
+        };
+        service.scheduleAtFixedRate(task, 0, 20, TimeUnit.SECONDS);
 
     }
 }
