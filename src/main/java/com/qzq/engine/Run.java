@@ -38,7 +38,8 @@ public class Run {
         System.out.println("-------------------------------------------------------");
         System.out.println("poloniex2gate");
         gate2Poloniex.poloniex2gate();
-
+//        String[][] tableData = gate2Poloniex.getTableData();
+//        System.out.println(tableData);
 
     }
 }
