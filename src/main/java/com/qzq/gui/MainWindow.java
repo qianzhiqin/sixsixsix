@@ -2,6 +2,7 @@ package com.qzq.gui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import com.qzq.gui.listen.FrameListener;
 import com.qzq.gui.listen.IndexListener;
 
@@ -17,11 +18,19 @@ import java.awt.*;
 public class MainWindow {
     private JPanel mainPanel;
     private JTabbedPane tabbedPane;
-    private JLabel i2;
-    private JLabel i1;
-    private JLabel i3;
-    private JLabel i4;
+    private JLabel label2;
+    private JLabel label1;
+    private JLabel label3;
+    private JLabel label4;
     private JPanel indexPanel;
+    private JTable dataTable;
+    private JScrollPane scrollPane;
+    private JLabel buy1;
+    private JLabel sell1;
+    private JLabel gate;
+    private JLabel zb;
+    private JLabel buy2;
+    private JLabel sell2;
 
 
     public static JFrame frame;
@@ -29,7 +38,6 @@ public class MainWindow {
 
     public MainWindow() {
     }
-
     public static void main(String[] args) {
         mainWindow = new MainWindow();
         frame = new JFrame("111");
@@ -48,6 +56,7 @@ public class MainWindow {
 
         FrameListener.addListeners();
         IndexListener.addListeners();
+        Init.initAll();
     }
 
     public JPanel getMainPanel() {
@@ -66,36 +75,36 @@ public class MainWindow {
         this.tabbedPane = tabbedPane;
     }
 
-    public JLabel getI2() {
-        return i2;
+    public JLabel getLabel2() {
+        return label2;
     }
 
-    public void setI2(JLabel i2) {
-        this.i2 = i2;
+    public void setLabel2(JLabel label2) {
+        this.label2 = label2;
     }
 
-    public JLabel getI1() {
-        return i1;
+    public JLabel getLabel1() {
+        return label1;
     }
 
-    public void setI1(JLabel i1) {
-        this.i1 = i1;
+    public void setLabel1(JLabel label1) {
+        this.label1 = label1;
     }
 
-    public JLabel getI3() {
-        return i3;
+    public JLabel getLabel3() {
+        return label3;
     }
 
-    public void setI3(JLabel i3) {
-        this.i3 = i3;
+    public void setLabel3(JLabel label3) {
+        this.label3 = label3;
     }
 
-    public JLabel getI4() {
-        return i4;
+    public JLabel getLabel4() {
+        return label4;
     }
 
-    public void setI4(JLabel i4) {
-        this.i4 = i4;
+    public void setLabel4(JLabel label4) {
+        this.label4 = label4;
     }
 
     public JPanel getIndexPanel() {
@@ -104,6 +113,70 @@ public class MainWindow {
 
     public void setIndexPanel(JPanel indexPanel) {
         this.indexPanel = indexPanel;
+    }
+
+    public JTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(JTable dataTable) {
+        this.dataTable = dataTable;
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
+    public JLabel getBuy1() {
+        return buy1;
+    }
+
+    public void setBuy1(JLabel buy1) {
+        this.buy1 = buy1;
+    }
+
+    public JLabel getSell1() {
+        return sell1;
+    }
+
+    public void setSell1(JLabel sell1) {
+        this.sell1 = sell1;
+    }
+
+    public JLabel getGate() {
+        return gate;
+    }
+
+    public void setGate(JLabel gate) {
+        this.gate = gate;
+    }
+
+    public JLabel getZb() {
+        return zb;
+    }
+
+    public void setZb(JLabel zb) {
+        this.zb = zb;
+    }
+
+    public JLabel getBuy2() {
+        return buy2;
+    }
+
+    public void setBuy2(JLabel buy2) {
+        this.buy2 = buy2;
+    }
+
+    public JLabel getSell2() {
+        return sell2;
+    }
+
+    public void setSell2(JLabel sell2) {
+        this.sell2 = sell2;
     }
 
     {
@@ -128,21 +201,45 @@ public class MainWindow {
         indexPanel = new JPanel();
         indexPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane.addTab("首页", indexPanel);
-        i2 = new JLabel();
-        i2.setText("222");
-        indexPanel.add(i2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        i1 = new JLabel();
-        i1.setText("1111");
-        indexPanel.add(i1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        i3 = new JLabel();
-        i3.setText("333");
-        indexPanel.add(i3, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        i4 = new JLabel();
-        i4.setText("444");
-        indexPanel.add(i4, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label2 = new JLabel();
+        label2.setText("222");
+        indexPanel.add(label2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label1 = new JLabel();
+        label1.setText("1111");
+        indexPanel.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label3 = new JLabel();
+        label3.setText("333");
+        indexPanel.add(label3, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label4 = new JLabel();
+        label4.setText("444");
+        indexPanel.add(label4, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(2, 7, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane.addTab("  1   ", panel1);
+        scrollPane = new JScrollPane();
+        panel1.add(scrollPane, new GridConstraints(1, 0, 1, 7, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        dataTable = new JTable();
+        scrollPane.setViewportView(dataTable);
+        gate = new JLabel();
+        gate.setText("Label");
+        panel1.add(gate, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buy1 = new JLabel();
+        buy1.setText("Label");
+        panel1.add(buy1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panel1.add(spacer1, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 1, false));
+        zb = new JLabel();
+        zb.setText("");
+        panel1.add(zb, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buy2 = new JLabel();
+        buy2.setText("");
+        panel1.add(buy2, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        sell1 = new JLabel();
+        sell1.setText("Label");
+        panel1.add(sell1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        sell2 = new JLabel();
+        sell2.setText("");
+        panel1.add(sell2, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane.addTab("   2  ", panel2);

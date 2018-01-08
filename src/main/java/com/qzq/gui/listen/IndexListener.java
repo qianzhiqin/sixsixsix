@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 public class IndexListener {
     public static void addListeners() {
 
-        MainWindow.mainWindow.getI1().addMouseListener(new MouseAdapter() {
+        MainWindow.mainWindow.getLabel1().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseEntered(e);

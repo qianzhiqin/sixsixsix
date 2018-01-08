@@ -24,7 +24,6 @@ public class Gate2Poloniex {
 //        initMoney = 10000 / huilv.get("buy");
 //    }
     public void init(Map<String, Double> poloniexMap, Map<String, Map<String, Double>> gateMap, Map<String, Double> huilvMap) {
-
         poloniex = poloniexMap;
         gate = gateMap;
         huilv = huilvMap;
@@ -74,6 +73,39 @@ public class Gate2Poloniex {
             }
         }
         return list;
+    }
+
+    public String[][] getTableData() {
+        List<String[]> list =new ArrayList<>();
+        if (poloniex.size() > 0 && gate.size() > 0) {
+            for (String key : gate.keySet()) {
+                Map<String, Double> gateMap = gate.get(key);
+                double buyGate = gateMap.get("buy");
+                double buyPoloniex = poloniex.get(key) == null ? 0 : poloniex.get(key);
+                double sellGate = gateMap.get("sell");
+                String[] line = new String[7];
+                if (buyPoloniex != 0) {
+                    Double buyGateRes = (initMoney / buyGate) * buyPoloniex - initMoney;
+                    Double buyPoloniexRes = (initMoney / buyPoloniex) * sellGate - initMoney;
+                    line[0] = key;
+                    line[1] = String.valueOf(buyGateRes);
+                    line[2] = String.valueOf(buyGate);
+                    line[3] = String.valueOf(buyPoloniex);
+                    line[4] = String.valueOf(buyPoloniexRes);
+                    line[5] = String.valueOf(buyPoloniex);
+                    line[6] = String.valueOf(sellGate);
+                    list.add(line);
+                }
+            }
+        }
+       String[][] res = new String[list.size()][7];
+        for (int i = 0; i <list.size() ; i++) {
+            String[] tmp = list.get(i);
+            for (int j = 0; j <tmp.length ; j++) {
+                res[i][j] = tmp[j];
+            }
+        }
+        return res;
     }
 
     public void main(String[] args) {

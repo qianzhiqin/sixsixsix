@@ -51,12 +51,15 @@ public class Bite {
         } catch (Exception e) {
             return res;
         }
-        JSONArray top = (JSONArray) jsonObject.get("top");
+        if (null != jsonObject) {
+
+            JSONArray top = (JSONArray) jsonObject.get("top");
 //        top.get(0);
-        Double buy = Double.parseDouble(String.valueOf(top.get(2)));
-        Double sell = Double.parseDouble(String.valueOf(top.get(1)));
-        res.put("sell", sell);
-        res.put("buy", buy);
+            Double buy = Double.parseDouble(String.valueOf(top.get(2)));
+            Double sell = Double.parseDouble(String.valueOf(top.get(1)));
+            res.put("sell", sell);
+            res.put("buy", buy);
+        }
         return res;
     }
 
