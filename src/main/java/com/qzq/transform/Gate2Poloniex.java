@@ -1,5 +1,7 @@
 package com.qzq.transform;
 
+import com.qzq.gui.util.CommonUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,12 +90,12 @@ public class Gate2Poloniex {
                     Double buyGateRes = (initMoney / buyGate) * buyPoloniex - initMoney;
                     Double buyPoloniexRes = (initMoney / buyPoloniex) * sellGate - initMoney;
                     line[0] = key;
-                    line[1] = String.valueOf(buyGateRes);
-                    line[2] = String.valueOf(buyGate);
-                    line[3] = String.valueOf(buyPoloniex);
-                    line[4] = String.valueOf(buyPoloniexRes);
-                    line[5] = String.valueOf(buyPoloniex);
-                    line[6] = String.valueOf(sellGate);
+                    line[1] = String.valueOf(CommonUtils.df.format(buyGateRes));
+                    line[2] = String.valueOf(CommonUtils.df.format(buyGate));
+                    line[3] = String.valueOf(CommonUtils.df.format(buyPoloniex));
+                    line[4] = String.valueOf(CommonUtils.df.format(buyPoloniexRes));
+                    line[5] = String.valueOf(CommonUtils.df.format(buyPoloniex));
+                    line[6] = String.valueOf(CommonUtils.df.format(sellGate));
                     list.add(line);
                 }
             }
