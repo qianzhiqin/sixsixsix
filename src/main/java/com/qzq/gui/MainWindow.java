@@ -25,13 +25,17 @@ public class MainWindow {
     private JPanel indexPanel;
     private JTable dataTable;
     private JScrollPane scrollPane;
-    private JLabel buy1;
-    private JLabel sell1;
-    private JLabel gate;
+    private JLabel gbuy1;
+    private JLabel gsell1;
+    private JLabel ghuilv1;
     private JLabel zb;
     private JLabel buy2;
     private JLabel sell2;
     private JPanel hulvpanel;
+    private JTable g2bTable;
+    private JLabel ghuilv2;
+    private JLabel gbuy2;
+    private JLabel gsell2;
 
 
     public static JFrame frame;
@@ -134,28 +138,28 @@ public class MainWindow {
         this.scrollPane = scrollPane;
     }
 
-    public JLabel getBuy1() {
-        return buy1;
+    public JLabel getGbuy1() {
+        return gbuy1;
     }
 
-    public void setBuy1(JLabel buy1) {
-        this.buy1 = buy1;
+    public void setGbuy1(JLabel gbuy1) {
+        this.gbuy1 = gbuy1;
     }
 
-    public JLabel getSell1() {
-        return sell1;
+    public JLabel getGsell1() {
+        return gsell1;
     }
 
-    public void setSell1(JLabel sell1) {
-        this.sell1 = sell1;
+    public void setGsell1(JLabel gsell1) {
+        this.gsell1 = gsell1;
     }
 
-    public JLabel getGate() {
-        return gate;
+    public JLabel getGhuilv1() {
+        return ghuilv1;
     }
 
-    public void setGate(JLabel gate) {
-        this.gate = gate;
+    public void setGhuilv1(JLabel ghuilv1) {
+        this.ghuilv1 = ghuilv1;
     }
 
     public JLabel getZb() {
@@ -180,6 +184,46 @@ public class MainWindow {
 
     public void setSell2(JLabel sell2) {
         this.sell2 = sell2;
+    }
+
+    public JPanel getHulvpanel() {
+        return hulvpanel;
+    }
+
+    public void setHulvpanel(JPanel hulvpanel) {
+        this.hulvpanel = hulvpanel;
+    }
+
+    public JTable getG2bTable() {
+        return g2bTable;
+    }
+
+    public void setG2bTable(JTable g2bTable) {
+        this.g2bTable = g2bTable;
+    }
+
+    public JLabel getGhuilv2() {
+        return ghuilv2;
+    }
+
+    public void setGhuilv2(JLabel ghuilv2) {
+        this.ghuilv2 = ghuilv2;
+    }
+
+    public JLabel getGbuy2() {
+        return gbuy2;
+    }
+
+    public void setGbuy2(JLabel gbuy2) {
+        this.gbuy2 = gbuy2;
+    }
+
+    public JLabel getGsell2() {
+        return gsell2;
+    }
+
+    public void setGsell2(JLabel gsell2) {
+        this.gsell2 = gsell2;
     }
 
     /**
@@ -242,12 +286,12 @@ public class MainWindow {
         hulvpanel = new JPanel();
         hulvpanel.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
         panel1.add(hulvpanel, new GridConstraints(0, 0, 1, 7, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        gate = new JLabel();
-        gate.setText("gate");
-        hulvpanel.add(gate, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buy1 = new JLabel();
-        buy1.setText("");
-        hulvpanel.add(buy1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ghuilv1 = new JLabel();
+        ghuilv1.setText("gate");
+        hulvpanel.add(ghuilv1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbuy1 = new JLabel();
+        gbuy1.setText("");
+        hulvpanel.add(gbuy1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         hulvpanel.add(spacer1, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 1, false));
         zb = new JLabel();
@@ -256,15 +300,45 @@ public class MainWindow {
         buy2 = new JLabel();
         buy2.setText("");
         hulvpanel.add(buy2, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        sell1 = new JLabel();
-        sell1.setText("");
-        hulvpanel.add(sell1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gsell1 = new JLabel();
+        gsell1.setText("");
+        hulvpanel.add(gsell1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         sell2 = new JLabel();
         sell2.setText("");
         hulvpanel.add(sell2, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane.addTab("g2b", panel2);
+        final JScrollPane scrollPane1 = new JScrollPane();
+        panel2.add(scrollPane1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        g2bTable = new JTable();
+        scrollPane1.setViewportView(g2bTable);
+        final JPanel panel3 = new JPanel();
+        panel3.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.add(panel3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        ghuilv2 = new JLabel();
+        ghuilv2.setText("gate");
+        panel3.add(ghuilv2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbuy2 = new JLabel();
+        gbuy2.setText("");
+        panel3.add(gbuy2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        panel3.add(spacer2, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 1, false));
+        final JLabel label5 = new JLabel();
+        label5.setText("");
+        panel3.add(label5, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label6 = new JLabel();
+        label6.setText("");
+        panel3.add(label6, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gsell2 = new JLabel();
+        gsell2.setText("");
+        panel3.add(gsell2, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label7 = new JLabel();
+        label7.setText("");
+        panel3.add(label7, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new BorderLayout(0, 0));
+        tabbedPane.addTab("g2z", panel4);
     }
 
     /**

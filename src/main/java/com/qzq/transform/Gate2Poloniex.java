@@ -85,8 +85,8 @@ public class Gate2Poloniex {
                 double buyGate = gateMap.get("buy");
                 double buyPoloniex = poloniex.get(key) == null ? 0 : poloniex.get(key);
                 double sellGate = gateMap.get("sell");
-                String[] line = new String[7];
                 if (buyPoloniex != 0) {
+                    String[] line = new String[7];
                     Double buyGateRes = (initMoney / buyGate) * buyPoloniex - initMoney;
                     Double buyPoloniexRes = (initMoney / buyPoloniex) * sellGate - initMoney;
                     line[0] = key;
