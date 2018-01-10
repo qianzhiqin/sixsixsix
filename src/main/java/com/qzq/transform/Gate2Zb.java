@@ -46,11 +46,11 @@ public class Gate2Zb {
                     Double buyZbRes = (initMoney / (buyZb * zhuilvBuy)) * sellGateCny - initMoney;
                     line[0] = key;
                     line[1] = String.valueOf(CommonUtils.df.format(buyGateRes));
-                    line[2] = String.valueOf(CommonUtils.df.format(buyGate));
-                    line[3] = String.valueOf(CommonUtils.df.format(sellZb));
+                    line[2] = String.valueOf(CommonUtils.df.format(buyGate) + "  (" + buyGateCny + ")");
+                    line[3] = String.valueOf(CommonUtils.df.format(sellZb) + "  (" + sellZb * zhuilvSell + ")");
                     line[4] = String.valueOf(CommonUtils.df.format(buyZbRes));
-                    line[5] = String.valueOf(CommonUtils.df.format(buyZb));
-                    line[6] = String.valueOf(CommonUtils.df.format(sellGate));
+                    line[5] = String.valueOf(CommonUtils.df.format(buyZb) + "  (" + buyZb * zhuilvBuy + ")");
+                    line[6] = String.valueOf(CommonUtils.df.format(sellGate) + "  (" + sellGateCny + ")");
                     list.add(line);
                 }
             }
