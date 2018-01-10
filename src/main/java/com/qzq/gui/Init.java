@@ -5,6 +5,7 @@ import com.qzq.engine.DataCenter;
 import com.qzq.gui.util.CommonUtils;
 import com.qzq.transform.Gate2Bite;
 import com.qzq.transform.Gate2Poloniex;
+import com.qzq.transform.Gate2Zb;
 import com.sun.java.swing.plaf.motif.MotifLookAndFeel;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
@@ -121,12 +122,29 @@ public class Init {
                 JLabel gbuy2 = MainWindow.mainWindow.getGbuy2();
                 JLabel gsell2 = MainWindow.mainWindow.getGsell2();
 
+                JLabel ghuilv3 = MainWindow.mainWindow.getGhuilv3();
+                JLabel gbuy3 = MainWindow.mainWindow.getGbuy3();
+                JLabel gsell3 = MainWindow.mainWindow.getGsell3();
+
+                JLabel zhuilv = MainWindow.mainWindow.getZhuilv();
+                JLabel zbuy = MainWindow.mainWindow.getZbuy();
+                JLabel zsell = MainWindow.mainWindow.getZsell();
+
                 ghuilv1.setText("gate  " + CommonUtils.now());
                 gbuy1.setText("buy:" + String.valueOf(DataCenter.gateHuilvMap.get("buy")));
                 gsell1.setText("sell:" + String.valueOf(DataCenter.gateHuilvMap.get("sell")));
                 ghuilv2.setText("gate  " + CommonUtils.now());
                 gbuy2.setText("buy:" + String.valueOf(DataCenter.gateHuilvMap.get("buy")));
                 gsell2.setText("sell:" + String.valueOf(DataCenter.gateHuilvMap.get("sell")));
+                ghuilv3.setText("gate  " + CommonUtils.now());
+                gbuy3.setText("buy:" + String.valueOf(DataCenter.gateHuilvMap.get("buy")));
+                gsell3.setText("sell:" + String.valueOf(DataCenter.gateHuilvMap.get("sell")));
+
+                zhuilv.setText("zb  " + CommonUtils.now());
+                zbuy.setText("buy:" + String.valueOf(DataCenter.zbHuilvMap.get("buy")));
+                zsell.setText("sell:" + String.valueOf(DataCenter.zbHuilvMap.get("sell")));
+
+
                 /*********************table****************************/
                 JTable dataTable = MainWindow.mainWindow.getDataTable();
                 String[] headerNames = {"coin", "g-p差值", "buy", "sell", "p-g差值", "buy", "sell"};
@@ -142,13 +160,24 @@ public class Init {
                 JTable g2bTable = MainWindow.mainWindow.getG2bTable();
                 String[] g2bHeaderNames = {"coin", "g-b差值", "buy", "sell", "b-g差值", "buy", "sell"};
                 String[][] g2bCellData = null;
-                if (DataCenter.gateMap != null && DataCenter.biteMap != null ) {
+                if (DataCenter.gateMap != null && DataCenter.biteMap != null) {
                     Gate2Bite gate2Bite = new Gate2Bite();
-                    gate2Bite.init( DataCenter.gateMap, DataCenter.biteMap);
+                    gate2Bite.init(DataCenter.gateMap, DataCenter.biteMap);
                     g2bCellData = gate2Bite.getTableData();
                 }
                 DefaultTableModel g2bModel = new DefaultTableModel(g2bCellData, g2bHeaderNames);
                 g2bTable.setModel(g2bModel);
+                /**********************************************/
+                JTable g2zTable = MainWindow.mainWindow.getG2zTable();
+                String[] g2zHeaderNames = {"coin", "g-z差值", "buy", "sell", "z-g差值", "buy", "sell"};
+                String[][] g2zCellData = null;
+                if (DataCenter.gateMap != null && DataCenter.zbMap != null && DataCenter.zbHuilvMap != null && DataCenter.gateHuilvMap != null) {
+                    Gate2Zb gate2Zb = new Gate2Zb();
+                    gate2Zb.init(DataCenter.gateMap, DataCenter.zbMap,DataCenter.gateHuilvMap,DataCenter.zbHuilvMap);
+                    g2zCellData = gate2Zb.getTableData();
+                }
+                DefaultTableModel g2zModel = new DefaultTableModel(g2zCellData, g2zHeaderNames);
+                g2zTable.setModel(g2zModel);
                 System.out.println("----end flush---");
             }
         };

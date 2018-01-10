@@ -1,10 +1,8 @@
 package com.qzq.engine;
 
-import com.qzq.spider.Bite;
-import com.qzq.spider.Gate;
-import com.qzq.spider.GateHuilv;
-import com.qzq.spider.Poloniex;
+import com.qzq.spider.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -24,9 +22,12 @@ public class DataCenter {
     public static Map<String, Double> poloniexMap = null;
     public static Map<String, Map<String, Double>> biteMap = null;
     public static Map<String, Double>  gateHuilvMap = null;
+    public static Map<String, Map<String, Double>> zbMap = null;
+    public static Map<String, Double>  zbHuilvMap = new HashMap<>();
 
     public static void schedule() {
-        Map<String, Map<String, Double>> gate1;
+        zbHuilvMap.put("sell",6.63);
+        zbHuilvMap.put("buy",6.7);
         TimerTask gate = new TimerTask() {
             @Override
             public void run() {
@@ -71,10 +72,23 @@ public class DataCenter {
                 }
             }
         };
+        TimerTask zb = new TimerTask() {
+            @Override
+            public void run() {
+                Map<String, Map<String, Double>> zbMapTmp = Zb.run();
+                System.out.println("5");
+                if (zbMapTmp != null) {
+                    System.out.println(zbMapTmp.toString());
+                    zbMap = zbMapTmp;
+                }
+            }
+        };
+
         service.scheduleAtFixedRate(gate, 0, 1, TimeUnit.MINUTES);
         service.scheduleAtFixedRate(poloniex, 0, 1, TimeUnit.MINUTES);
         service.scheduleAtFixedRate(bite, 0, 1, TimeUnit.MINUTES);
         service.scheduleAtFixedRate(gateHuilv, 0, 1, TimeUnit.MINUTES);
+        service.scheduleAtFixedRate(zb, 0, 1, TimeUnit.MINUTES);
 
     }
 }
